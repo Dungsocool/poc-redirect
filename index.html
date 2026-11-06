@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Redirect PoC</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #2a2a2a;
+            border: 2px solid #ff4444;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 { color: #ff4444; }
+        .info { background: #333; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: left; font-family: monospace; font-size: 14px; word-break: break-all; }
+        .label { color: #888; font-size: 12px; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Open Redirect PoC</h1>
+        <p>You have been redirected from <strong>developer.apple.com</strong> to an attacker-controlled domain.</p>
+
+        <div class="info">
+            <div class="label">Referrer:</div>
+            <div id="referrer"></div>
+        </div>
+
+        <div class="info">
+            <div class="label">Current URL:</div>
+            <div id="current-url"></div>
+        </div>
+
+        <div class="info">
+            <div class="label">Timestamp:</div>
+            <div id="timestamp"></div>
+        </div>
+
+        <p style="color: #888; font-size: 13px; margin-top: 20px;">
+            This page demonstrates that an attacker could host a phishing page here.<br>
+            Bug class: Open Redirect via regex bypass in getReturnUrl()
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('referrer').textContent = document.referrer || '(none)';
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('timestamp').textContent = new Date().toISOString();
+    </script>
+</body>
+</html>
